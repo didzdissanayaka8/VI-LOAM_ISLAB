@@ -2,7 +2,7 @@
 
 ## Visual Inertial Lidar Odometry and Mapping
 
-This repository contains code for a VI-LOAM system, which combines the advantages of [A-LOAM](https://github.com/HKUST-Aerial-Robotics/A-LOAM.git) and [Vins-Mono](https://github.com/HKUST-Aerial-Robotics/VINS-Mono) at a system level.
+This repository contains code for a VI-LOAM system, which combines the advantages of [A-LOAM](https://github.com/HKUST-Aerial-Robotics/A-LOAM.git) and [Vins-Mono](https://github.com/HKUST-Aerial-Robotics/VINS-Mono) at a system level. 
 
 A-LOAM is an Advanced implementation of LOAM (J. Zhang and S. Singh. LOAM: Lidar Odometry and Mapping in Real-time), which uses Eigen and Ceres Solver to simplify code structure. This code is modified from LOAM and [LOAM_NOTED](https://github.com/cuitaixiang/LOAM_NOTED). This code is clean and simple without complicated mathematical derivation and redundant operations. 
 
@@ -31,38 +31,46 @@ Clone the repository and catkin_make:
 
 ```
     cd ~/catkin_ws/src
-    git clone https://github.com/HKUST-Aerial-Robotics/A-LOAM.git
+    git clone https://github.com/didzdissanayaka8/VI-LOAM_ISLAB.git
     cd ../
     catkin_make
     source ~/catkin_ws/devel/setup.bash
 ```
 
-## 3. Velodyne VLP-16 Example
-Download [NSH indoor outdoor](https://drive.google.com/file/d/1s05tBQOLNEDDurlg48KiUWxCp-YqYyGH/view) to YOUR_DATASET_FOLDER. 
+## 3. Datasets
+
+## LVI-SAM Dataset
+
+
+Download [LVI-SAM Dataset](https://drive.google.com/drive/folders/1q2NZnsgNmezFemoxhHnrDnp1JV_bqrgV?usp=sharing). The dataset include following sensors: Velodyne VLP-16 lidar, FLIR BFS-U3-04S2M-CS camera, MicroStrain 3DM-GX5-25 IMU, and Reach RS+ GPS.
+
+**Note** that the images in the provided bag files are in compressed format. So a decompression command is added at the last line of ```launch/module_sam.launch```. If your own bag records the raw image data, please comment this line out.
+
+## AI4L Dataset
+
+## 4. Run the package
+
+1. Configure parameters:
 
 ```
-    roslaunch aloam_velodyne aloam_velodyne_VLP_16.launch
-    rosbag play YOUR_DATASET_FOLDER/nsh_indoor_outdoor.bag
+Configure sensor parameters in the .yaml files in the ```config``` folder.
 ```
 
-
-## 4. KITTI Example (Velodyne HDL-64)
-Download [KITTI Odometry dataset](http://www.cvlibs.net/datasets/kitti/eval_odometry.php) to YOUR_DATASET_FOLDER and set the `dataset_folder` and `sequence_number` parameters in `kitti_helper.launch` file. Note you also convert KITTI dataset to bag file for easy use by setting proper parameters in `kitti_helper.launch`. 
-
+2. Run the launch file:
 ```
-    roslaunch aloam_velodyne aloam_velodyne_HDL_64.launch
-    roslaunch aloam_velodyne kitti_helper.launch
+roslaunch viloam run.launch
 ```
-<img src="https://github.com/HKUST-Aerial-Robotics/A-LOAM/blob/devel/picture/kitti_gif.gif" width = 720 height = 351 />
 
-## 5. Docker Support
-To further facilitate the building process, we add docker in our code. Docker environment is like a sandbox, thus makes our code environment-independent. To run with docker, first make sure [ros](http://wiki.ros.org/ROS/Installation) and [docker](https://docs.docker.com/install/linux/docker-ce/ubuntu/) are installed on your machine. Then add your account to `docker` group by `sudo usermod -aG docker $YOUR_USER_NAME`. **Relaunch the terminal or logout and re-login if you get `Permission denied` error**, type:
+3. Play existing bag files:
 ```
-cd ~/catkin_ws/src/A-LOAM/docker
-make build
-```
-The build process may take a while depends on your machine. After that, run `./run.sh 16` or `./run.sh 64` to launch A-LOAM, then you should be able to see the result.
+rosbag play handheld.bag 
 
 
-## 6.Acknowledgements
-Thanks for LOAM(J. Zhang and S. Singh. LOAM: Lidar Odometry and Mapping in Real-time) and [LOAM_NOTED](https://github.com/cuitaixiang/LOAM_NOTED).
+## 5.Acknowledgements
+
+
+## Acknowledgement
+
+  - The visual-inertial odometry module is adapted from [Vins-Mono](https://github.com/HKUST-Aerial-Robotics/VINS-Mono).
+  - The lidar-inertial odometry module is adapted from [LIO-SAM](https://github.com/TixiaoShan/LIO-SAM/tree/a246c960e3fca52b989abf888c8cf1fae25b7c25).
+  - Tightly-coupled lidar-visual inertial odometry and mapping [LVI-SAM](https://github.com/TixiaoShan/LVI-SAM.git)
