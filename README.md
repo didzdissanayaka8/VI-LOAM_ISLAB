@@ -29,7 +29,9 @@ Follow [PCL Installation](http://www.pointclouds.org/downloads/linux.html).
 Follow [OpenCV Installation](https://docs.opencv.org/4.x/d7/d9f/tutorial_linux_install.html).
 
 
-## 2. Build A-LOAM
+
+
+## 2. Build VI-LOAM
 Clone the repository and catkin_make:
 
 ```
