@@ -62,12 +62,9 @@ roslaunch viloam run.launch
 3. Play existing bag files:
 ```
 rosbag play handheld.bag 
-
+```
 
 ## 5.Acknowledgements
-
-
-## Acknowledgement
 
   - The visual-inertial odometry module is adapted from [Vins-Mono](https://github.com/HKUST-Aerial-Robotics/VINS-Mono).
   - The lidar-inertial odometry module is adapted from [LIO-SAM](https://github.com/TixiaoShan/LIO-SAM/tree/a246c960e3fca52b989abf888c8cf1fae25b7c25).
