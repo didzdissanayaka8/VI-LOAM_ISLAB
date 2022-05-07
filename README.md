@@ -8,7 +8,7 @@ A-LOAM is an Advanced implementation of LOAM (J. Zhang and S. Singh. LOAM: Lidar
 
 <img src="https://github.com/HKUST-Aerial-Robotics/A-LOAM/blob/devel/picture/kitti.png" width = 55% height = 55%/>
 
-**Modifier:** [Tong Qin](http://www.qintonguav.com), [Shaozu Cao](https://github.com/shaozu)
+**Modifier:** [Didula Dissanayaka](https://dissanayakadidula.wixsite.com/diduladissanayaka)
 
 
 ## 1. Prerequisites
