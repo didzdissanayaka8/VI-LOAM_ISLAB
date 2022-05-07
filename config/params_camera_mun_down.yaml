@@ -1,0 +1,132 @@
+%YAML:1.0
+
+# Project
+project_name: "viloam"
+
+#common parameters
+imu_topic: "/imu/data"
+image_topic: "/camera/image_mono"
+point_cloud_topic: "/velodyne_points"
+
+# Lidar Params
+use_lidar: 0                     # whether use depth info from lidar or not
+lidar_skip: 3                    # skip this amount of scans
+align_camera_lidar_estimation: 0 # align camera and lidar estimation for visualization
+
+
+
+# camera model
+model_type: KANNALA_BRANDT
+camera_name: camera
+
+
+# Mono camera config
+image_width: 1440 
+image_height: 1080
+distortion_parameters:
+   k2: -7.9377007062735899e-02
+   k3: 2.2284351435322768e-02
+   k4: -3.8520236914351517e-02
+   k5: 1.3468731910146955e-02
+projection_parameters:
+   mu: 8.5438302448076183e+02
+   mv: 8.5328595428948654e+02
+   u0: 7.8032452226114674e+02
+   v0: 5.2069067282703327e+02
+
+
+#imu parameters       The more accurate parameters you provide, the better performance
+acc_n: 0.08          # accelerometer measurement noise standard deviation. 
+gyr_n: 0.004        # gyroscope measurement noise standard deviation.     
+acc_w: 0.00004        # accelerometer bias random work noise standard deviation.  
+gyr_w: 0.0001       # gyroscope bias random work noise standard deviation.     
+g_norm: 9.803     # gravity magnitude
+
+# Extrinsic parameter between IMU and Camera.
+estimate_extrinsic: 0   # 0  Have an accurate extrinsic parameters. We will trust the following imu^R_cam, imu^T_cam, don't change it.
+                        # 1  Have an initial guess about extrinsic parameters. We will optimize around your initial guess.
+                        # 2  Don't know anything about extrinsic parameters. You don't need to give R,T. We will try to calibrate it. Do some rotation movement at beginning. 
+#Rotation from camera frame to imu frame, imu^R_cam
+extrinsicRotation: !!opencv-matrix
+   rows: 3
+   cols: 3
+   dt: d
+   data: [ 0.00235643,  0.99997843, -0.00613037,  
+           -0.99960218,  0.00218315, -0.02811962,
+           -0.02810563,  0.0061942,   0.99958577]
+
+#Translation from camera frame to lidar frame, imu^t_cam
+extrinsicTranslation: !!opencv-matrix
+   rows: 3
+   cols: 1
+   dt: d
+   data: [-0.25805624, -0.01138283, 0.09243762]
+
+#Rotation from lidar frame to camera frame, cam^R_lidar
+extrinsicRotationLidar: !!opencv-matrix
+   rows: 3
+   cols: 3
+   dt: d
+#   data: [0.0258,   0.9996,  0.0067, 
+#          0.0005,    -0.0067,  1.0000,
+#          0.9997,    -0.0258,  -0.0007]     
+   data: [ 0.1201,  0.9927,   -0.0042,
+          -0.0165,  0.0062,    0.9998,
+           0.9926, -0.1200,    0.0171]
+
+# lidar to camera extrinsic  -  this is the fine tuning for the Lidar?
+lidar_to_cam_tx: 0
+lidar_to_cam_ty: 0
+lidar_to_cam_tz: 0
+lidar_to_cam_rx: 0
+lidar_to_cam_ry: 0
+lidar_to_cam_rz: 0   #+ve yaw
+
+
+# Original [ -0.0062, -0.9992, -0.0393, 
+#           0.0040, 0.0392, -0.9992,
+#           1.00, -0.0063, 0.0038]
+#Adjustments from nominal for overlay  (ZYX) in degrees
+#1 : 0.3536 0.2311 -2.249
+#2 :   0   -0.36 -0.22   
+
+
+#Translation from lidar frame to camera frame, cam^t_lidar
+extrinsicTranslationLidar: !!opencv-matrix
+   rows: 3
+   cols: 1
+   dt: d
+#   data: [-0.0896, 0.3994, 0.0444]
+   data: [-0.0560, 0.3639, 0.0700]
+
+
+#feature traker paprameters
+max_cnt: 150            # max feature number in feature tracking
+min_dist: 20            # min distance between two features 
+freq: 20                # frequence (Hz) of publish tracking result. At least 10Hz for good estimation. If set 0, the frequence will be same as raw image 
+F_threshold: 1.0        # ransac threshold (pixel)
+show_track: 1           # publish tracking image as topic
+equalize: 1             # if image is too dark or light, trun on equalize to find enough features
+fisheye: 0              # if using fisheye, trun on it. A circle mask will be loaded to remove edge noisy points
+
+#optimization parameters
+max_solver_time: 0.035   # max solver itration time (ms), to guarantee real time
+max_num_iterations: 10   # max solver itrations, to guarantee real time
+keyframe_parallax: 10.0  # keyframe selection threshold (pixel)
+
+#unsynchronization parameters
+estimate_td: 0           # online estimate time offset between camera and imu
+td: -0.0278247886862                # initial value of time offset. unit: s. readed image clock + td = real image clock (IMU clock)
+
+#rolling shutter parameters
+rolling_shutter: 0       # 0: global shutter camera, 1: rolling shutter camera
+rolling_shutter_tr: 0    # unit: s. rolling shutter read out time per frame (from data sheet). 
+
+#loop closure parameters
+loop_closure: 1                    # start loop closure
+skip_time: 0.0
+skip_dist: 0.0
+debug_image: 0                      # save raw image in loop detector for visualization prupose; you can close this function by setting 0 
+match_image_scale: 0.5
+vocabulary_file: "/config/brief_k10L6.bin"
+brief_pattern_file: "/config/brief_pattern.yml"

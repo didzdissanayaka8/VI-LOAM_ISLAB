@@ -1,0 +1,8 @@
+<launch>
+
+    <arg name="project" default="viloam"/>
+
+    <!--- Run Rviz-->
+    <node pkg="rviz" type="rviz" name="$(arg project)_rviz" args="-d $(find viloam)/launch/include/config/gvloam.rviz" />
+
+</launch>

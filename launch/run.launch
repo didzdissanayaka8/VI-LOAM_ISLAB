@@ -1,0 +1,14 @@
+<launch>
+
+    <!--- Robot State TF -->
+    <include file="$(find viloam)/launch/include/module_robot_state_publisher.launch" />
+
+    <!--- Run Rviz-->
+    <include file="$(find viloam)/launch/include/module_rviz.launch" />
+
+    <!--- SAM -->
+    <include file="$(find viloam)/launch/include/module_sam.launch" />
+
+    <!--- LOAM -->
+    <include file="$(find viloam)/launch/include/aloam_velodyne_VLP_16_new.launch" />
+</launch>
