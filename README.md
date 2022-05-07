@@ -13,15 +13,17 @@ A-LOAM is an Advanced implementation of LOAM (J. Zhang and S. Singh. LOAM: Lidar
 
 ## 1. Prerequisites
 ### 1.1 **Ubuntu** and **ROS**
-Ubuntu 64-bit 16.04 or 18.04.
-ROS Kinetic or Melodic. [ROS Installation](http://wiki.ros.org/ROS/Installation)
-
+Ubuntu 64-bit 16.04, 18.04 or 20.04.
+ROS Kinetic, Melodic or. [ROS Installation](http://wiki.ros.org/ROS/Installation)
 
 ### 1.2. **Ceres Solver**
 Follow [Ceres Installation](http://ceres-solver.org/installation.html).
 
 ### 1.3. **PCL**
 Follow [PCL Installation](http://www.pointclouds.org/downloads/linux.html).
+
+### 1.4. **OpenCV 3.4 or higher**
+Follow [OpenCV Installation](https://docs.opencv.org/4.x/d7/d9f/tutorial_linux_install.html).
 
 
 ## 2. Build A-LOAM
