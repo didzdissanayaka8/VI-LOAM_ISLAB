@@ -8,6 +8,11 @@ A-LOAM is an Advanced implementation of LOAM (J. Zhang and S. Singh. LOAM: Lidar
 
 **Modifier:** [Didula Dissanayaka](https://dissanayakadidula.wixsite.com/diduladissanayaka)
 
+<p align='center'>
+    <img src="./config/viloam.gif" alt="drawing" width="800"/>
+</p>
+
+
 
 ## 1. Prerequisites
 ### 1.1 **Ubuntu** and **ROS**
