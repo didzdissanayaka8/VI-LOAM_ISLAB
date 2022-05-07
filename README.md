@@ -30,7 +30,6 @@ Follow [OpenCV Installation](https://docs.opencv.org/4.x/d7/d9f/tutorial_linux_i
 
 
 
-
 ## 2. Build VI-LOAM
 Clone the repository and catkin_make:
 
@@ -45,6 +44,10 @@ Clone the repository and catkin_make:
 ## 3. Datasets
 
 ## LVI-SAM Dataset
+
+<p align='center'>
+    <img src="./config/Screenshot 2022-05-07 110100.png" alt="drawing" width="800"/>
+</p>
 
 
 Download [LVI-SAM Dataset](https://drive.google.com/drive/folders/1q2NZnsgNmezFemoxhHnrDnp1JV_bqrgV?usp=sharing). The dataset include following sensors: Velodyne VLP-16 lidar, FLIR BFS-U3-04S2M-CS camera, MicroStrain 3DM-GX5-25 IMU, and Reach RS+ GPS.
